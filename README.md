@@ -29,3 +29,7 @@ Clone the configuration:
 
 Then you can run `nvim` in console or `neovide` for the graphic interface.
 
+Treesitter could lack some language parser, install them from nvim this way:
+
+    `:TSInstall c`
+    `:TSInstall lua`
