@@ -6,6 +6,7 @@ Up to date packages for ubuntu (git version):
 
     $ sudo add-apt-repository ppa:neovim-ppa/unstable
     $ sudo apt update
+    $ sudo apt install neovim
 
 Install of neovide, require rustc:
 
@@ -26,5 +27,5 @@ Clone the configuration:
     $ git clone https://github.com/wlallemand/nvim-config ~/.config/nvim/
 
 
-Then you can run `neovim` in console or `neovide` for the graphic interface.
+Then you can run `nvim` in console or `neovide` for the graphic interface.
 
