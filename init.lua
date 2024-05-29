@@ -85,6 +85,19 @@ require("lazy").setup(plugins, opts)
 -- theme
 vim.cmd.colorscheme "catppuccin"
 
+-- trailing whitespace hilighting
+vim.cmd.syn "on"
+vim.g.show_whitespace = 1
+if vim.g.show_whitespace then
+  local ag = vim.api.nvim_create_augroup('show_whitespace', { clear = true })
+  vim.api.nvim_create_autocmd('Syntax', {
+    pattern = '*',
+    command = [[syntax match TrailingWS /\v\s\ze\s*$/ containedin=ALL]],
+    group = ag,
+  })
+  vim.cmd [[highlight TrailingWS ctermbg=203 ctermfg=203 guibg=IndianRed1 guifg=IndianRed1]]
+end
+
 -- completion
 vim.o.completeopt = "menu,menuone,noinsert"
 
