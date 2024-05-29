@@ -10,7 +10,7 @@ Up to date packages for ubuntu (git version):
 
 Install of neovide, require rustc:
 
-    $ cargo install --git https://github.com/neovide/neovide/ 
+    $ cargo install --git https://github.com/neovide/neovide/
 
 The binary will be installed in ~/.cargo/bin/neovide, check that it is in your $PATH environment variable.
 A shell alias can be useful:
