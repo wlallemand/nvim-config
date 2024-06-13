@@ -58,6 +58,7 @@ vim.o.shiftwidth = 8
 vim.o.smartindent = true
 vim.o.autoindent = true
 vim.o.wrap = true
+vim.opt.formatoptions:remove('t')
 
 -- lazy plugins
 local plugins = {
