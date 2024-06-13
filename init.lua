@@ -79,7 +79,9 @@ local plugins = {
 	{ 'hrsh7th/nvim-cmp'},
 	{ 'L3MON4D3/LuaSnip'},
 	{ "neovim/nvim-lspconfig" },
-	{ "MysticalDevil/inlay-hints.nvim", config = true }
+	{ "MysticalDevil/inlay-hints.nvim", config = true },
+	{ "kwkarlwang/bufresize.nvim", config = true }, -- resize the split when resizing the terminal
+
 }
 require("lazy").setup(plugins, opts)
 
