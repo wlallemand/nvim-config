@@ -74,6 +74,7 @@ local plugins = {
 
 	{ 'neovim/nvim-lspconfig' }, -- Collection of configurations for built-in LSP client
 
+	{ 'p00f/clangd_extensions.nvim', config = true },
 	{ 'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
 	{ 'hrsh7th/cmp-nvim-lsp'},
 	{ 'hrsh7th/nvim-cmp'},
