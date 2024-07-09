@@ -133,4 +133,10 @@ lsp_zero.on_attach(function(client, bufnr)
 	lsp_zero.default_keymaps({buffer = bufnr})
 end)
 
+lsp_zero.set_server_config({
+  on_init = function(client)
+    client.server_capabilities.semanticTokensProvider = nil
+  end,
+})
+
 require 'lspconfig'.clangd.setup{}
