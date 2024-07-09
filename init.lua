@@ -78,7 +78,6 @@ local plugins = {
 	{ 'hrsh7th/cmp-nvim-lsp'},
 	{ 'hrsh7th/nvim-cmp'},
 	{ 'L3MON4D3/LuaSnip'},
-	{ "neovim/nvim-lspconfig" },
 	{ "MysticalDevil/inlay-hints.nvim", config = true },
 	{ "kwkarlwang/bufresize.nvim", config = true }, -- resize the split when resizing the terminal
 
