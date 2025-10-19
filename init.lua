@@ -83,6 +83,15 @@ local plugins = {
 }
 require("lazy").setup(plugins, opts)
 
+-- Treesitter setup
+require("nvim-treesitter.configs").setup({
+  ensure_installed = { "lua", "c", "cpp", "python", "rust" },
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+})
+
 -- theme
 vim.cmd.colorscheme "catppuccin"
 
