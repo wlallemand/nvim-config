@@ -99,6 +99,18 @@ vim.diagnostic.config({
   virtual_lines = { only_current_line = true }
 })
 
+-- autocompletion
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if client:supports_method('textDocument/completion') then
+      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+    end
+  end,
+})
+vim.o.completeopt = "menu,menuone,noinsert,noselect"
+
+
 -- theme
 vim.cmd.colorscheme "catppuccin"
 
@@ -115,8 +127,6 @@ if vim.g.show_whitespace then
   vim.cmd [[highlight TrailingWS ctermbg=203 ctermfg=203 guibg=IndianRed1 guifg=IndianRed1]]
 end
 
--- completion
-vim.o.completeopt = "menu,menuone,noinsert"
 
 -- telescope
 local builtin = require('telescope.builtin')
