@@ -77,6 +77,7 @@ local plugins = {
 	{ 'hrsh7th/nvim-cmp'},
 	{ 'L3MON4D3/LuaSnip'},
 
+	{ "https://git.sr.ht/~whynothugo/lsp_lines.nvim", config = true },
 	{ "MysticalDevil/inlay-hints.nvim", config = true },
 	{ "kwkarlwang/bufresize.nvim", config = true }, -- resize the split when resizing the terminal
 
@@ -90,6 +91,12 @@ require("nvim-treesitter.configs").setup({
     enable = true,
     additional_vim_regex_highlighting = false,
   },
+})
+
+-- lsp_line config
+vim.diagnostic.config({
+  virtual_text = false,
+  virtual_lines = { only_current_line = true }
 })
 
 -- theme
