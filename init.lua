@@ -71,14 +71,12 @@ local plugins = {
 	{ "lewis6991/gitsigns.nvim", config = true },
 	{ 'nvim-telescope/telescope.nvim', branch = '0.1.x', config = true },
 
-
-	{ 'neovim/nvim-lspconfig' }, -- Collection of configurations for built-in LSP client
-
 	{ 'p00f/clangd_extensions.nvim', config = true },
 	{ 'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
 	{ 'hrsh7th/cmp-nvim-lsp'},
 	{ 'hrsh7th/nvim-cmp'},
 	{ 'L3MON4D3/LuaSnip'},
+
 	{ "MysticalDevil/inlay-hints.nvim", config = true },
 	{ "kwkarlwang/bufresize.nvim", config = true }, -- resize the split when resizing the terminal
 
@@ -124,19 +122,10 @@ if vim.g.neovide == true then
 end
 
 
--- lsp
-local lsp_zero = require('lsp-zero')
+vim.lsp.config.clangd = {
+  cmd = { 'clangd', '--background-index' },
+  root_markers = { 'compile_commands.json', 'compile_flags.txt' },
+  filetypes = { 'c', 'cpp' },
+}
 
-lsp_zero.on_attach(function(client, bufnr)
-	-- see :help lsp-zero-keybindings
-	-- to learn the available actions
-	lsp_zero.default_keymaps({buffer = bufnr})
-end)
-
-lsp_zero.set_server_config({
-  on_init = function(client)
-    client.server_capabilities.semanticTokensProvider = nil
-  end,
-})
-
-require 'lspconfig'.clangd.setup{}
+vim.lsp.enable({'clangd'})
