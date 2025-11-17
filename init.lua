@@ -6,7 +6,7 @@ if not vim.loop.fs_stat(lazypath) then
         "clone",
         "--filter=blob:none",
         "--single-branch",
-	"https://github.com/folke/lazy.nvim.git",
+        "https://github.com/folke/lazy.nvim.git",
         "--branch=stable", -- latest stable release
         lazypath,
     })
@@ -75,6 +75,7 @@ local plugins = {
 	{ 'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
 	{ 'hrsh7th/cmp-nvim-lsp'},
 	{ 'hrsh7th/nvim-cmp'},
+	{ 'hrsh7th/cmp-nvim-lsp-signature-help'},
 	{ 'L3MON4D3/LuaSnip'},
 
 	{ "https://git.sr.ht/~whynothugo/lsp_lines.nvim", config = true },
@@ -105,11 +106,41 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     if client:supports_method('textDocument/completion') then
       vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+      vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
     end
   end,
 })
-vim.o.completeopt = "menu,menuone,noinsert,noselect"
 
+local cmp = require("cmp")
+cmp.setup({
+  completion = {
+    autocomplete = { cmp.TriggerEvent.TextChanged },  -- While-typing completion
+  },
+
+  snippet = {
+    expand = function(args)
+      require("luasnip").lsp_expand(args.body)
+    end,
+  },
+
+  mapping = cmp.mapping.preset.insert({
+    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+    ["<Tab>"] = cmp.mapping.select_next_item(),
+    ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+  }),
+
+  sources = {
+    { name = "nvim_lsp" },
+    { name = "nvim_lsp_signature_help" },
+    { name = "buffer" },
+    { name = "path" },
+  },
+})
+
+
+vim.o.completeopt = "menu,menuone,noinsert,noselect"
 
 -- theme
 vim.cmd.colorscheme "catppuccin"
