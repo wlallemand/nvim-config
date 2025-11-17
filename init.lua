@@ -166,6 +166,18 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "qf",
+  callback = function()
+    vim.keymap.set("n", "<Esc>", function()
+      vim.cmd("cclose")
+      vim.cmd("lclose")
+    end, { buffer = true, silent = true })
+  end,
+})
+
+
 -- neovide
 if vim.g.neovide == true then
 	local function set_scale(scale)
